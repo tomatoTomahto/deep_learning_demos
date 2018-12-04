@@ -350,40 +350,23 @@ train_model(
 #This is just one possible configuration; there may be other combinations of settings that also give good results. Note that in general, this exercise isn't about finding the *one best* setting, but to help build your intutions about how tweaking the model configuration affects prediction quality.
 
 # ### Is There a Standard Heuristic for Model Tuning?
+#This is a commonly asked question. The short answer is that the effects of different hyperparameters are data dependent. So there are no hard-and-fast rules; you'll need to test on your data.
+#That said, here are a few rules of thumb that may help guide you:
+# * Training error should steadily decrease, steeply at first, and should eventually plateau as training converges.
+# * If the training has not converged, try running it for longer.
+# * If the training error decreases too slowly, increasing the learning rate may help it decrease faster.
+#   * But sometimes the exact opposite may happen if the learning rate is too high.
+# * If the training error varies wildly, try decreasing the learning rate.
+#   * Lower learning rate plus larger number of steps or larger batch size is often a good combination.
+# * Very small batch sizes can also cause instability.  First try larger values like 100 or 1000, and decrease until you see degradation.
 
-This is a commonly asked question. The short answer is that the effects of different hyperparameters are data dependent. So there are no hard-and-fast rules; you'll need to test on your data.
+#Again, never go strictly by these rules of thumb, because the effects are data dependent.  Always experiment and verify.
 
-That said, here are a few rules of thumb that may help guide you:
+# ## Task 2: Try a Different Feature
+#See if you can do any better by replacing the `total_rooms` feature with the `population` feature.
+#Don't take more than 5 minutes on this portion.
 
- * Training error should steadily decrease, steeply at first, and should eventually plateau as training converges.
- * If the training has not converged, try running it for longer.
- * If the training error decreases too slowly, increasing the learning rate may help it decrease faster.
-   * But sometimes the exact opposite may happen if the learning rate is too high.
- * If the training error varies wildly, try decreasing the learning rate.
-   * Lower learning rate plus larger number of steps or larger batch size is often a good combination.
- * Very small batch sizes can also cause instability.  First try larger values like 100 or 1000, and decrease until you see degradation.
-
-Again, never go strictly by these rules of thumb, because the effects are data dependent.  Always experiment and verify.
-
-## Task 2: Try a Different Feature
-
-See if you can do any better by replacing the `total_rooms` feature with the `population` feature.
-
-Don't take more than 5 minutes on this portion.
-"""
-
-train_model(
-    learning_rate=0.00002,
-    steps=1000,
-    batch_size=5,
-    input_feature='population'
-)
-
-"""### Solution
-
-Click below for one possible solution.
-"""
-
+# ### Solution
 train_model(
     learning_rate=0.00002,
     steps=1000,
